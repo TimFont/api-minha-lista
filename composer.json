@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "start": "php -S localhost:8080 -t public"
+    },
+    "require": {
+        "slim/slim": "^3.0"
+    }
+}
