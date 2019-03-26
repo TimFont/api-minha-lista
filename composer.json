@@ -1,8 +1,11 @@
 {
+    "require": {
+        "slim/slim": "^3.0"
+    },
     "scripts": {
         "start": "php -S localhost:8080 -t public"
     },
-    "require": {
-        "slim/slim": "^3.0"
+    "config": {
+        "process-timeout" : 0
     }
 }
