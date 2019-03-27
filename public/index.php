@@ -6,18 +6,12 @@ require '../vendor/autoload.php';
 
 //config database
 
-require '../src/config/database.php';
+$settings =  require __DIR__ . '/../core/Settings.php';
+$app = new \Slim\App($settings);
 
 
 
-$app = new \Slim\App;
-
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Random, $name");
-
-    return $response;
-});
-
-require '../src/config/routes.php';
+require __DIR__ . '/../core/Routes.php';
+require __DIR__ . '/../core/Dependencies.php';
+require __DIR__ . '/../core/Services.php';
 $app->run();
