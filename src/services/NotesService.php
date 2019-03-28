@@ -17,4 +17,16 @@ namespace App\services;
 
             return json_encode($notes);
         }
+
+        public function registerNote($noteTitle, $noteContent){
+            $query = 'INSERT INTO public.notes(title, content) VALUES(:title, :content);';
+
+            $statement = $this->database->prepare($query);
+            $statement->bindParam('title', $noteTitle);
+            $statement->bindParam('content', $noteContent);
+
+            $statement->execute();
+
+
+        }
     }

@@ -7,4 +7,5 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->group('/api', function(){
     
     $this->get('/notes', 'App\controllers\NotesController:getAllNotes');
+    $this->post('/notes', 'App\controllers\NotesController:createNote');
 });
