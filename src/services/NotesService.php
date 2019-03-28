@@ -7,15 +7,34 @@ namespace App\services;
             $this->database = $database;
         }
 
-        public function logTest(){
-            $query = 'SELECT * FROM public.notes';
-        
+        public function fetchAllNotes(){
+
+            $query = 'SELECT * FROM public.notes';   
             $stmt = $this->database->query($query);
-
             $notes = $stmt->fetchAll(\PDO::FETCH_OBJ);
-            $database= null;
+            return $notes;
 
-            return json_encode($notes);
+        }
+
+        public function getById($id){
+
+            $query = 'SELECT * FROM public.notes WHERE id_note = :id;';
+
+            $statement = $this->database->prepare($query);
+            $statement->bindParam('id', $id);
+            $statement->execute();
+            $note = $statement->fetchAll(\PDO::FETCH_OBJ);
+
+            return $note;
+
+        }
+
+        public function checkNote($id){
+            if (empty($this->getById($id))){
+                return false;
+            }else{
+                return true;
+            }
         }
 
         public function registerNote($noteTitle, $noteContent){
@@ -27,6 +46,36 @@ namespace App\services;
 
             $statement->execute();
 
+            return $this->getById($this->database->lastInsertId());
 
+        }
+
+        public function deleteNote($id){
+            $query = 'DELETE FROM public.notes WHERE id_note = :id';
+
+            $statement = $this->database->prepare($query);
+            $statement->bindParam('id', $id);
+            $statement->execute();
+
+        }
+
+        public function editNote($id, array $args){
+            
+            $quersy = 'UPDATE public.notes SET title = \"batatao\" where id_note = 5;';
+            $query = 'UPDATE public.notes SET ';
+            $counter = 0;
+           foreach($args as $field => $value){
+                $query = $query . $field . ' = '. '\'' .  $value . '\''.  (($counter == count($args) -1) ? ' ' : ', ');
+                $counter++;
+            }
+            $query = $query . 'WHERE id_note = :id;';
+
+            $statement = $this->database->prepare($query);
+            $statement->bindParam('id', $id);
+            $statement->execute();
+            
+            return $this->getById($id);
+
+            //return $query;
         }
     }
