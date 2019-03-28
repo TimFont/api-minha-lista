@@ -61,7 +61,6 @@ namespace App\services;
 
         public function editNote($id, array $args){
             
-            $quersy = 'UPDATE public.notes SET title = \"batatao\" where id_note = 5;';
             $query = 'UPDATE public.notes SET ';
             $counter = 0;
            foreach($args as $field => $value){
