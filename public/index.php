@@ -4,10 +4,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 
-//carregar variaveis do ambiente
 $baseDir = __DIR__ . '/../';
-$dotenv = Dotenv\Dotenv::create($baseDir);
-$dotenv->load();
+
+if(file_exists($baseDir . '/' . '.env')){
+    $dotenv = Dotenv\Dotenv::create($baseDir);
+    $dotenv->load();
+}
 
 //configurações da instancia da aplicação
 $settings =  require __DIR__ . '/../core/Settings.php';
