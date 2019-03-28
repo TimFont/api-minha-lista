@@ -4,8 +4,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 
-//config database
+//carregar variaveis do ambiente
+$baseDir = __DIR__ . '/../';
+$dotenv = Dotenv\Dotenv::create($baseDir);
+$dotenv->load();
 
+//configurações da instancia da aplicação
 $settings =  require __DIR__ . '/../core/Settings.php';
 $app = new \Slim\App($settings);
 

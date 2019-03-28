@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/composer,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=composer,visualstudio,visualstudiocode
-
+.env
 ### Composer ###
 composer.phar
 /vendor/
